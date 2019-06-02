@@ -11,9 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FSRouter : NSProxy
 
-+ (void)route:(NSString *)url completion:(void(^)(BOOL parsed,NSDictionary *params))completion;
++ (void)route:(NSString *)url completion:(nullable void(^)(BOOL parsed,NSDictionary *params))completion;
 
-+ (void)routeClass:(NSString *)className params:(NSDictionary *)params completion:(void (^)(id vc))configBlockParam;
++ (void)routeClass:(NSString *)className params:(nullable NSDictionary *)params completion:(nullable void (^)(id vc))configBlockParam;
 
 + (void)setNavigationController:(UINavigationController *)controller;
 

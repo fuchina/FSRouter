@@ -10,7 +10,7 @@
 
 @implementation FSRouter
 
-+ (void)route:(NSString *)url completion:(void(^)(BOOL parsed,NSDictionary *params))completion{
++ (void)route:(NSString *)url completion:(nullable void(^)(BOOL parsed,NSDictionary *params))completion{
     BOOL parsed = YES;
     if (!([url isKindOfClass:NSString.class] && url.length)) {
         parsed = NO;
@@ -25,12 +25,11 @@
     }
 }
 
-+ (void)routeClass:(NSString *)className params:(NSDictionary *)params completion:(void (^)(id vc))configBlockParam{
++ (void)routeClass:(NSString *)className params:(nullable NSDictionary *)params completion:(nullable void (^)(id vc))configBlockParam{
     dispatch_async(dispatch_get_main_queue(), ^{
         Class Controller = NSClassFromString(className);
         if (Controller) {
             UIViewController *viewController = [[Controller alloc] init];
-            //... 根据字典给属性赋值
             for (NSString *key in params) {
                 SEL setSEL = [FSRuntime setterSELWithAttibuteName:key];
                 if ([viewController respondsToSelector:setSEL]) {
